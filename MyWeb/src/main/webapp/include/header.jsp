@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-idth, initial-scale=1">
 
@@ -29,16 +30,13 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/MyWeb/js/bootstrap.min.js"></script>
-	
 
-    <!-- Script to Activate the Carousel -->
-    
 </head>
 <body>
 
-    <!-- header -->
+	<!-- header -->
     <div class="brand">
-        <a href="/MyWeb">My Web</a>
+    	<a href="/MyWeb">My Web</a>
     </div>
     <div class="address-bar">Welcome to MyWorld</div>
 
@@ -68,14 +66,26 @@
                         <a href="">Member</a>
                     </li>
                     <li>
-                        <a href="">BOARD</a>
+                        <a href="/MyWeb/list.board">BOARD</a>
                     </li>
-                    <li>
-                        <a href="/MyWeb/loginPage.user">LOGIN</a>
-                    </li>
-                    <li>
-                        <a href="/MyWeb/joinPage.user" style="color:red">JOIN</a>
-                    </li>
+                    <c:choose>
+                    	<c:when test="${user == null}">
+		                    <li>
+		                        <a href="/MyWeb/loginPage.user">LOGIN</a>
+		                    </li>
+		                    <li>
+		                        <a href="/MyWeb/joinPage.user" style="color:red">JOIN</a>
+		                    </li>
+                    	</c:when>
+                    	<c:otherwise>
+		                    <li>
+		                        <a href="/MyWeb/logout.user">LOGOUT</a>
+		                    </li>
+		                    <li>
+		                        <a href="/MyWeb/myPage.user" style="color:red">MyPage</a>
+		                    </li>
+                    	</c:otherwise>
+                    </c:choose>
                 </ul>
             </div>
 
@@ -85,5 +95,20 @@
         <!-- /.container -->
     </nav>
     <!-- end header -->
+	
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
