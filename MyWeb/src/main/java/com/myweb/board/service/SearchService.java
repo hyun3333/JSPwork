@@ -16,7 +16,7 @@ public class SearchService implements IBoardService {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		String category = request.getParameter("category");
-		String keyword = request.getParameter("keyword");
+		String keyword = request.getParameter("search");
 		List<BoardVO> list = BoardDAO.getInstance().searchBoard(keyword, category);
 		
 		if(list.size() == 0) {
