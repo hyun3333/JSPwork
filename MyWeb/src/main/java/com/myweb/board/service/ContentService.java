@@ -1,5 +1,6 @@
 package com.myweb.board.service;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,7 +28,24 @@ public class ContentService implements IBoardService {
          현재 글 번호와 일치하는 쿠키가 없다면 조회수를 올려주도록 하겠습니다.  
         */
 		
+		String bNum = request.getParameter("bId");
 		
+		boolean flag = false;
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null) {
+			for(Cookie c : cookies) {
+				if(c.getName().equals(bNum)) {
+					flag = true;
+					break;
+				}
+			}
+			if(!flag) {
+				Cookie hitCoo = new Cookie(bNum, bNum);
+				hitCoo.setMaxAge(15);
+				response.addCookie(hitCoo);
+				dao.upHit(bId);
+			}
+		}
 		
 		
 		BoardVO vo = dao.contentBoard(bId);
